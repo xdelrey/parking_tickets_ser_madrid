@@ -1,0 +1,24 @@
+vamos a trabajar el target:
+
+%_ocup_barrio(t+1h) = tickets_activos(t+1h) / plazas_totales_barrio
+
+Clasificación auxiliar: etiqueta binaria alta_ocup (=1 si % ocup ≥ 85 %)... o un semáforo (3 colores)
+
+### En este caso, el número de tickets activos en la próxima hora cómo se calcularía?
+
+- Un ticket activo es un vehículo que está ocupando una plaza un tiempo determinado.
+-- 1. En el dataset tenemos la fecha de inicio y la fecha fin de estacionamiento para indicarnos que se trata de un ticket activo.
+(Tenemos que identificar cada ticket con un identificador único).
+(Creamos un dataframe con todos los días del año divididos en franjas 15 minutos -además de indicar la hora del día en concreto-)
+(en ese dataframe de las franjas horarias de 15min, añadimos la información del sumatorio de tickets que están activos durante esa hora, junto a otro de información, p.ej. la relativa al barrio)
+(Es decir, no voy a tener en cuenta los tickets que han estado menos de 15 minutos)
+
+- Si un ticket se inica en la hora -1, y su periodo de fin no termina hasta más allá de los 15 minutos de la hora 0, ese ticket estará activo durante esa hora. Tampoco importa si la fecha de finalización del ticket se extiende a la hora +1. A efectos de cálculo, durante esa hora, ese ticket cuanta como ticket activo.
+y crear un dataframe con todas las franjas de 15min de todo el año.
+ 
+- para calcular el número de tickets activos en una hora determinada, agrupo las franjas de 15min y calculo los identificadores de tickets únicos para esa hora.
+(al final tendré en un dataframe una columna hora (con todas las horas del año) y el número de tickets que han estado activos)
+
+- cuántos datos debería tener para que el modelo tenga suficientes?
+Teniendo en cuenta que el número de plazas disponibles para cada barrio es un dato público y accesible,igual tengo que utilizar todo el dataset finalmente... a traves de Colab no tendré problemas.
+Cualquier reducción del dataset original harían desvalancearse los datos puesto que no se podría reducir el número de plazas disponibles en proporción.
